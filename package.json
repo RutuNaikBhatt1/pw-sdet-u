@@ -1,0 +1,22 @@
+{
+  "name": "pw-sdet-u",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RutuNaikBhatt1/pw-sdet-u.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RutuNaikBhatt1/pw-sdet-u/issues"
+  },
+  "homepage": "https://github.com/RutuNaikBhatt1/pw-sdet-u#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.43.0",
+    "@types/node": "^20.12.7"
+  }
+}
