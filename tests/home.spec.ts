@@ -6,7 +6,7 @@ test.describe('Home Page', () => {
 
     test.beforeEach(async ({ page }) => {
         homePage = new HomePage(page);
-        await homePage.navigate()
+        await homePage.navigate();
     })
     test('Verify Home page title', async ({ page }) => {
         await expect(page).toHaveTitle('Practice E-Commerce Site – SDET Unicorns');
