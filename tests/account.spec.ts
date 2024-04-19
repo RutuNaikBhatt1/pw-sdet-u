@@ -2,7 +2,7 @@ import {test, expect } from "@playwright/test";
 import AccountPage from "../pages/accountPage";
 import { generateEmailAddress, generateUserName, generatePassword} from "../helpers/users";
 
-test.describe('Account Page', () => {
+test.describe.serial('Account Page', () => {
     let accountPage :AccountPage;
     const user = generateUserName();
     const email = generateEmailAddress();
@@ -17,8 +17,8 @@ test.describe('Account Page', () => {
     await accountPage.registerANewUser(user, email, password);
     await expect(accountPage.dashboardLink).toBeVisible();
     })
-    test('Login with registered user', async ({ page }) => {
-      await accountPage.loginWithEmail(email, password);
-      await expect(accountPage.dashboardLink).toBeVisible();
+    test('Login with registered user', async () => {
+    await accountPage.loginWithEmail(email, password);
+    await expect(accountPage.dashboardLink).toBeVisible();
     })
 })
