@@ -17,7 +17,7 @@ constructor(page: Page){
     this.emailInput = page.locator('#reg_email');
     this.registerPasswordInput = page.locator('#reg_password');
     this.registerButton = page.locator('button[type=submit]').getByText('Register');
-    this.dashboardLink = page.locator('li').getByText('Dashboard');
+    this.dashboardLink = page.locator('a:has-text("Dashboard")')
     this.loginUserInput = page.locator('#username');
     this.loginPasswordInput = page.locator('#password');
     this.loginButton = page.locator('button[type=submit]').getByText('Log in');
