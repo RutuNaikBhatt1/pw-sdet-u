@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/RutuNaikBhatt1/pw-sdet-u#readme",
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@playwright/test": "^1.43.0",
     "@types/node": "^20.12.7",
     "@typescript-eslint/eslint-plugin": "7.6.0",

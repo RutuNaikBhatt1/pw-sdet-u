@@ -8,7 +8,6 @@ test.describe('Cart Page', () => {
   test.beforeEach(async ({ page }) => {
     cartPage = new CartPage(page);
     await cartPage.navigateToCartPage();
-    await expect(cartPage.cartHeader).toBeVisible();
   })
   
     test('Upload file', async ({ page }) => {

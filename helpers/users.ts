@@ -1,14 +1,14 @@
-import { randomInt } from "crypto";
+import { faker} from '@faker-js/faker';
 
 export function generateUserName(){
-    const user = 'test_user'+(new Date().toISOString().replace(/[-T:.]/g, ''));
+    const user = ('test_user'+ faker.person.firstName());
     return user;
 }
 export function generateEmailAddress(){
-    const email = (generateUserName()+`@safetodelete.com`);
+    const email = ('test_user_'+faker.person.firstName()+`@safetodelete.com`);
     return email;
 }
 export function generatePassword(){
-    const password = `${'Sd@tUn1c0rns'+ randomInt(5)}`;
+    const password = faker.internet.password();
     return password;
 }

@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test";
+import { Locator, Page, expect } from "@playwright/test";
 
 export default class CartPage{
 page: Page
@@ -17,5 +17,6 @@ constructor(page: Page){
 
 async navigateToCartPage() {
     await this.page.goto('/cart');
+    await expect(this.cartHeader).toBeVisible();
 }
 }
