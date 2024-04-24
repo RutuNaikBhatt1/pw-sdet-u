@@ -25,6 +25,7 @@
     "allure-playwright": "^2.15.1",
     "eslint": "^8.56.0",
     "eslint-plugin-playwright": "^1.6.0",
+    "playwright-json-summary-reporter": "^1.0.1",
     "playwright-slack-report": "^1.1.72"
   }
 }

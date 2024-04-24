@@ -10,7 +10,7 @@ test.describe('Cart Page', () => {
     await cartPage.navigateToCartPage();
   })
   
-    test('Upload file', async ({ page }) => {
+    test('Upload file', async () => {
     const filePath = path.join(__dirname,'../assets/playwright.png');
     await cartPage.selectFileButton.setInputFiles(filePath);
     await cartPage.uploadFileButton.click();

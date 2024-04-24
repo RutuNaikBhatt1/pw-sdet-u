@@ -22,7 +22,9 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [ [
+  reporter: [
+    ['playwright-json-summary-reporter'],
+    [
     "./node_modules/playwright-slack-report/dist/src/SlackReporter.js",
     {
       slackWebHookUrl: "https://hooks.slack.com/services/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",
