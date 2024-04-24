@@ -1,5 +1,5 @@
-- name: Run Playwright tests
-        run: APP_URL=${{ env.APP_URL}} npx playwright test
+ - name: Run Playwright tests
+        run: npx playwright test
 
       - name: Read Summary Report to Get Test Results
         if: always()
@@ -12,3 +12,59 @@
           FAILURES=$(cat ./summary.json | jq -r '.failed[]' | tr '\n' ' ')
           FAILURES+=$TIMEOUT
           echo "FAILURES=$FAILURES" >> $GITHUB_ENV
+          
+ - name: Send Slack Notification
+        if: always()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: custom
+          fields: repo,eventName,workflow,job,took
+          custom_payload: |
+            {
+              attachments: [{
+                color: '${{ job.status }}' === 'success' ? 'good' : 'danger',
+                title: `Playwright e2e Automation Results :test_tube:`,
+                fields: [{
+                  title: 'Practice Sdet unicorns',
+                  value: 'https://practice.sdetunicorns.com/',
+                  short: true
+                },
+                {
+                  title: 'Triggered By',
+                  value: [{'origin': 'pull_request', 'new': 'Pull Request'}, {'origin': 'schedule', 'new': 'Schedule'}, {'origin': 'repository_dispatch', 'new': 'Deploy'}, {'origin': 'workflow_dispatch', 'new': 'GitHub Actions'}].find(item => item.origin === `${process.env.AS_EVENT_NAME}`).new || `${process.env.AS_EVENT_NAME}`,
+                  short: true
+                },
+                {
+                  title: 'pw-sdet-u',
+                  value: 'https://github.com/RutuNaikBhatt1/pw-sdet-u',
+                  short: true
+                },
+                {
+                  title: 'Execution Time',
+                  value: `${process.env.AS_TOOK}`,
+                  short: true
+                },
+                {
+                  title: 'Workflow',
+                  value: `${process.env.AS_WORKFLOW}`,
+                  short: true
+                },
+                {
+                  title: 'Total Tests',
+                  value: (`${{ env.FAILURES }}`.match(/.spec.ts/g) || []).length + (`${{ env.PASSED }}`.match(/.spec.ts/g) || []).length,
+                  short: true
+                },
+                {
+                  title: 'Pull Request',
+                  value: `${{ env.PULL_REQUEST_URL }}`,
+                  short: false
+                },
+                {
+                  title: 'Failures',
+                  value: `${{ env.FAILURES }}` === '' ? 'No failures' : `${{ env.FAILURES }}`.match(/.spec.ts/g).length > 10 ? `Too many failures to print. Please go to GitHub to see full list of failures` : '```${{ env.FAILURES }}```'.replace(/ /g, '\n'),
+                  short: false
+                }]
+              }]
+            }  
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
