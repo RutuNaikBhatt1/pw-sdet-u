@@ -20,20 +20,19 @@ async navigate(){
     await this.page.goto('/shop');
     await expect(this.shopHeader).toBeVisible();
 }
-async getItemLink(productName: string) {
-    let link;
-  const items = this.page.locator('#zak-primary ul li a').all();
-  console.log('I am outside for loop');
-  for (const el of await items) {
-    console.log('I am inside for loop');
-    const linkText = `Add to cart: "${productName}"`;
-           link = this.page.getByRole('link', { name: linkText, exact: true });
-            //link = this.page.getByText(productName)
-            console.log(link);
-           // if(link === true){
-           await link.click();
-            await this.page.pause()
-           // }
-    }
-   }
+
+async getItemLink() {
+const list = this.page.locator('.products.columns-3 li')
+console.log(await list.count())
+for(let i=0; i<=await list.count(); i++){
+  console.log(list[i])
+  //const item = list
+ // console.log('print'+item)
+  // eslint-disable-next-line playwright/no-page-pause
+  
+//const addItemToCart = this.page.getByRole('link', { name: `Add to cart: "${productName}"`});
+//console.log('11111111111111111111111' + addItemToCart)
+//await addItemToCart.click()
+}
+}
 }
